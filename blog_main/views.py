@@ -5,10 +5,11 @@ from blog.models import Category,Blog
 
 def home(request):
     categories = Category.objects.all()
-    featured_post = Blog.objects.filter(is_featured=True)
+    featured_post = Blog.objects.filter(is_featured=True,status='Published')
+    post = Blog.objects.filter(is_featured=False, status='Published')
     context = {
         'categories' : categories,
         'featured_post':featured_post,
+        'post':post
     }
-
     return render(request, 'home.html', context)
